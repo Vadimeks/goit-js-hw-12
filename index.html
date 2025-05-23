@@ -3,20 +3,30 @@
 
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/svg+xml" href="/goit-js-hw-12/favicon.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>goit-js-hw-12</title>
   <script type="module" crossorigin src="/goit-js-hw-12/index.js"></script>
-  <link rel="stylesheet" crossorigin href="/goit-js-hw-12/assets/index-VVNuGyRr.css">
+  <link rel="modulepreload" crossorigin href="/goit-js-hw-12/assets/vendor-BLPZKqeQ.js">
+  <link rel="stylesheet" crossorigin href="/goit-js-hw-12/assets/vendor-CX4EDM7x.css">
+  <link rel="stylesheet" crossorigin href="/goit-js-hw-12/assets/index-CCWkWTg2.css">
 </head>
 
 <body>
 
+  <form class="search-form form">
+    <label>
+      <input type="text" name="search-text" placeholder="Search images..." required>
+    </label>
+    <button type="submit">Search</button>
+  </form>
 
-  <main>
-    <!-- Loads the specified .html file -->
+  <ul class="gallery">
+  </ul>
 
-  </main>
+  <div class="loader-container">
+    <span class="loader"></span>
+  </div>
 
 
 
