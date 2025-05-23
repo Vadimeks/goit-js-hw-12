@@ -32,8 +32,8 @@ searchForm.addEventListener('submit', async event => {
 
   if (!currentQuery) {
     iziToast.warning({
-      title: 'Папярэджанне',
-      message: 'Калі ласка, увядзіце пошукавы запыт.',
+      title: 'Warning',
+      message: 'Please, insert what are you looking for',
       position: 'topRight',
     });
     hideLoader();
@@ -58,18 +58,17 @@ searchForm.addEventListener('submit', async event => {
       }
     } else {
       iziToast.info({
-        title: 'Інфармацыя',
-        message:
-          'На жаль, няма малюнкаў, якія адпавядаюць вашаму пошукаваму запыту. Калі ласка, паспрабуйце яшчэ раз!',
+        title: 'Info',
+        message: 'Sorry, no suitable images. Please, try again!',
         position: 'topRight',
       });
     }
   } catch (error) {
     hideLoader();
     iziToast.error({
-      title: 'Памылка',
+      title: 'Mistake',
       message:
-        'Не атрымалася загрузіць малюнкі. Калі ласка, паспрабуйце пазней.',
+        'Unfortunately, impossible to load images now. Please, try later.',
       position: 'topRight',
     });
     console.error(error);
@@ -101,7 +100,7 @@ loadMoreButton.addEventListener('click', async () => {
     if (loadedImagesCount >= data.totalHits) {
       hideLoadMoreButton();
       iziToast.info({
-        message: 'Мы шкадуем, але вы дасягнулі канца вынікаў пошуку.',
+        message: 'This is the end of search',
         position: 'bottomCenter',
       });
     }
@@ -110,7 +109,7 @@ loadMoreButton.addEventListener('click', async () => {
     iziToast.error({
       title: 'Памылка',
       message:
-        'Не атрымалася загрузіць больш малюнкаў. Калі ласка, паспрабуйце пазней.',
+        'Unfortunately, impossible to load images now. Please, try later.',
       position: 'topRight',
     });
     console.error(error);
