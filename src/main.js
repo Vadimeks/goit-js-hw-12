@@ -1,6 +1,5 @@
-// Імпартуем функцыі для HTTP-запытаў
 import { getImagesByQuery } from './js/pixabay-api';
-// Імпартуем функцыі для адлюстравання UI і кіравання лоадером/кнопкай
+
 import {
   createGallery,
   clearGallery,
@@ -9,67 +8,55 @@ import {
   showLoadMoreButton,
   hideLoadMoreButton,
 } from './js/render-functions';
-// Імпартуем iziToast для апавяшчэнняў і яго стылі
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
-// Атрымліваем спасылкі на DOM-элементы
 const searchForm = document.querySelector('.search-form');
 const searchInput = searchForm.querySelector('input[name="search-text"]');
 const loadMoreButton = document.querySelector('.load-more-button');
-const gallery = document.querySelector('.gallery'); // Спасылка на галерэю для пракруткі
+const gallery = document.querySelector('.gallery');
 
-// Глабальныя зменныя для кіравання станам пагінацыі і пошуку
-let currentPage = 1; // Бягучы нумар старонкі, пачынаем з 1
-let currentQuery = ''; // Захоўваем бягучы пошукавы запыт
-const perPage = 15; // Колькасць малюнкаў на старонку, як патрабуецца задачай
+let currentPage = 1;
+let currentQuery = '';
+const perPage = 15;
 
-// ============================================================================
-// Апрацоўшчык падзей для адпраўкі формы пошуку
-// ============================================================================
 searchForm.addEventListener('submit', async event => {
-  event.preventDefault(); // Прадухіляем стандартную адпраўку формы (перазагрузку старонкі)
+  event.preventDefault();
 
-  currentQuery = searchInput.value.trim(); // Атрымліваем і ачышчаем пошукавы запыт
-  currentPage = 1; // Скідваем нумар старонкі да 1 пры новым пошуку
+  currentQuery = searchInput.value.trim();
+  currentPage = 1;
 
-  clearGallery(); // Ачышчаем галерэю ад папярэдніх вынікаў
-  hideLoadMoreButton(); // Хаваем кнопку "Загрузіць больш"
-  showLoader(); // Паказваем лоадер
+  clearGallery();
+  hideLoadMoreButton();
+  showLoader();
 
-  // Праверка на пусты пошукавы запыт
   if (!currentQuery) {
     iziToast.warning({
       title: 'Папярэджанне',
       message: 'Калі ласка, увядзіце пошукавы запыт.',
       position: 'topRight',
     });
-    hideLoader(); // Хаваем лоадер, бо запыт не адпраўляўся
-    searchForm.reset(); // Ачышчаем форму
-    return; // Спыняем выкананне функцыі
+    hideLoader();
+    searchForm.reset();
+    return;
   }
 
   try {
-    // Выконваем HTTP-запыт для атрымання малюнкаў
     const data = await getImagesByQuery(currentQuery, currentPage);
-    hideLoader(); // Хаваем лоадер пасля атрымання адказу
+    hideLoader();
 
-    // Праверка, ці былі знойдзены малюнкі
     if (data.hits.length > 0) {
-      createGallery(data.hits); // Ствараем галерэю з атрыманых малюнкаў
+      createGallery(data.hits);
 
-      // Праверка, ці ёсць яшчэ малюнкі для загрузкі (для паказу кнопкі "Загрузіць больш")
       if (data.totalHits > perPage) {
-        showLoadMoreButton(); // Паказваем кнопку "Загрузіць больш"
+        showLoadMoreButton();
       } else {
-        // Калі ўсе малюнкі змешчаны на першай старонцы, паказваем паведамленне пра канец вынікаў
         iziToast.info({
-          message: 'Мы шкадуем, але вы дасягнулі канца вынікаў пошуку.',
+          message: 'This is the End.',
           position: 'bottomCenter',
         });
       }
     } else {
-      // Калі па запыце нічога не знойдзена
       iziToast.info({
         title: 'Інфармацыя',
         message:
@@ -78,7 +65,6 @@ searchForm.addEventListener('submit', async event => {
       });
     }
   } catch (error) {
-    // Апрацоўка памылак HTTP-запыту
     hideLoader();
     iziToast.error({
       title: 'Памылка',
@@ -86,49 +72,40 @@ searchForm.addEventListener('submit', async event => {
         'Не атрымалася загрузіць малюнкі. Калі ласка, паспрабуйце пазней.',
       position: 'topRight',
     });
-    console.error(error); // Выводзім памылку ў кансоль для адладкі
+    console.error(error);
   } finally {
-    searchForm.reset(); // Ачышчаем форму пошуку незалежна ад выніку
+    searchForm.reset();
   }
 });
 
-// ============================================================================
-// Апрацоўшчык падзей для кнопкі "Загрузіць больш"
-// ============================================================================
 loadMoreButton.addEventListener('click', async () => {
-  currentPage += 1; // Павялічваем нумар старонкі для наступнага запыту
-  showLoader(); // Паказваем лоадер
+  currentPage += 1;
+  showLoader();
 
   try {
-    // Выконваем HTTP-запыт для атрымання наступнай порцыі малюнкаў
     const data = await getImagesByQuery(currentQuery, currentPage);
-    hideLoader(); // Хаваем лоадер
+    hideLoader();
 
-    createGallery(data.hits, true); // Дадаем новыя малюнкі да існуючых (append=true)
+    createGallery(data.hits, true);
 
-    // Плыўная пракрутка старонкі на дзве вышыні карткі галерэі
     const firstGalleryItem = gallery.querySelector('.gallery-item');
     if (firstGalleryItem) {
       const { height: cardHeight } = firstGalleryItem.getBoundingClientRect();
       window.scrollBy({
-        top: cardHeight * 2, // Пракручваем на дзве вышыні карткі
-        behavior: 'smooth', // Плыўная анімацыя пракруткі
+        top: cardHeight * 2,
+        behavior: 'smooth',
       });
     }
 
-    // Праверка, ці ёсць яшчэ малюнкі для загрузкі
-    // Вылічваем колькасць ужо загружаных малюнкаў
     const loadedImagesCount = currentPage * perPage;
-    // Калі колькасць загружаных малюнкаў дасягнула або перавысіла агульную колькасць вынікаў
     if (loadedImagesCount >= data.totalHits) {
-      hideLoadMoreButton(); // Хаваем кнопку, бо больш няма чаго загружаць
+      hideLoadMoreButton();
       iziToast.info({
         message: 'Мы шкадуем, але вы дасягнулі канца вынікаў пошуку.',
         position: 'bottomCenter',
       });
     }
   } catch (error) {
-    // Апрацоўка памылак пры загрузцы дадатковых малюнкаў
     hideLoader();
     iziToast.error({
       title: 'Памылка',
