@@ -4,62 +4,84 @@
  * | default @import url()
  * |============================
  */
-/* Common styles */
+/* Імпартуем базавыя стылі і скіды */
 @import url('./reset.css');
 @import url('./base.css');
 
 
-/* styles of pages */
+/* Стылі для асноўнай старонкі і кампанентаў */
 
 body {
   font-family: sans-serif;
+  /* Выкарыстоўваем агульны шрыфт без засечак */
   background-color: rgba(255, 255, 255, 1);
-  color: white;
+  /* Белы фон */
+  color: rgba(46, 47, 66, 1);
+  /* Цёмны колер тэксту для кантраснасці */
   max-width: 1440px;
+  /* Максімальная шырыня змесціва старонкі */
   margin: 0 auto;
+  /* Цэнтраванне ўсяго body па гарызанталі */
   padding: 36px 156px;
+  /* Унутраныя водступы зверху/знізу і злева/справа */
   display: flex;
+  /* Выкарыстоўваем Flexbox для размяшчэння элементаў у калонку */
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  /* Цэнтруем элементы па гарызанталі ўнутры body */
+  min-height: 100vh;
+  /* Забяспечвае, што body займае ўсю вышыню экрана */
 }
 
+/* Стылі для формы пошуку */
 .search-form {
   display: flex;
   gap: 8px;
+  /* Адлегласць паміж полем уводу і кнопкай */
   justify-content: center;
+  /* Цэнтруем змесціва формы */
   align-items: center;
   margin-bottom: 36px;
+  /* Адступ ад галерэі */
   width: 371px;
+  /* Фіксаваная шырыня формы */
   height: 40px;
 }
 
 .search-form label {
   flex-grow: 1;
+  /* Дазваляе полю ўводу займаць усю даступную шырыню */
 }
 
 .search-form input[type="text"] {
   width: 272px;
+  /* Фіксаваная шырыня поля ўводу */
   height: 40px;
   border: 1px solid rgba(128, 128, 128, 1);
   border-radius: 4px;
   font-size: 16px;
   color: #333;
+  padding: 0 16px;
+  /* Падынг для тэксту ўнутры поля */
 }
 
 .search-form input[type="text"]:hover {
   border: 1px solid rgba(0, 0, 0, 1);
+  /* Змена рамкі пры навядзенні */
 }
 
 .search-form input[type="text"]:focus {
   border: 1px solid rgba(78, 117, 255, 1);
+  /* Змена рамкі пры фокусе */
   outline: none;
+  /* Выдаляем стандартны outline */
 }
 
 .search-form button[type="submit"] {
   width: 91px;
   height: 40px;
   background-color: rgba(78, 117, 255, 1);
+  /* Сіні фон кнопкі */
   color: white;
   border: none;
   border-radius: 8px;
@@ -67,46 +89,66 @@ body {
   cursor: pointer;
   font-size: 16px;
   font-family: Montserrat;
+  /* Спецыфічны шрыфт для кнопкі */
   font-weight: 500;
   line-height: 24px;
   letter-spacing: 0.04em;
+  transition: background-color 0.3s ease;
+  /* Плыўны пераход колеру пры навядзенні */
 }
 
 .search-form button[type="submit"]:hover {
   background-color: rgba(108, 140, 255, 1);
+  /* Змена колеру пры навядзенні */
 }
 
+/* Стылі для галерэі малюнкаў */
 .gallery {
   list-style: none;
   display: grid;
+  /* Выкарыстоўваем CSS Grid для стварэння сеткі */
   grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  /* Адаптыўная сетка з элементамі мінімум 360px */
   gap: 24px;
+  /* Адлегласць паміж элементамі сеткі */
   max-width: 1128px;
+  /* Максімальная шырыня галерэі */
   border: none;
+  padding: 0;
+  margin: 0;
 }
 
 .gallery-item {
   width: 360px;
+  /* Фіксаваная шырыня элемента галерэі */
   height: 200px;
+  /* Фіксаваная вышыня элемента галерэі */
   border-width: 1px;
   border: 1px solid rgba(128, 128, 128, 1);
   border-radius: 4px;
   overflow: hidden;
+  /* Хаваем усё, што выходзіць за межы элемента */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  /* Цень для элемента */
   display: flex;
   flex-direction: column;
+  /* Элементы ўнутры карткі размяшчаюцца ў калонку */
 }
 
 .gallery-image {
   display: block;
   width: 100%;
   height: calc(200px - 48px);
+  /* Вышыня выявы = вышыня элемента - вышыня інфа-блока */
   object-fit: cover;
+  /* Выява будзе запаўняць прастору, абрэзаўшы лішняе */
   transition: transform 0.3s ease-in-out;
+  /* Плыўная анімацыя пры навядзенні */
 }
 
 .gallery-image:hover {
   transform: scale(1.05);
+  /* Павелічэнне выявы пры навядзенні */
 }
 
 .gallery-item a {
@@ -114,17 +156,21 @@ body {
   flex-direction: column;
   text-decoration: none;
   color: inherit;
+  /* Спасылка наследуе колер тэксту */
   height: 100%;
+  /* Спасылка займае ўсю вышыню элемента */
 }
 
 .info {
   display: flex;
   justify-content: space-between;
+  /* Элементы інфа-блока размяшчаюцца з роўнымі інтэрваламі */
   align-items: center;
   padding: 4px 20px;
   background-color: white;
   color: rgba(46, 47, 66, 1);
   height: 48px;
+  /* Фіксаваная вышыня інфа-блока */
 }
 
 .info-item {
@@ -149,8 +195,11 @@ body {
   line-height: 2;
 }
 
+/* Стылі для iziToast (апавяшчэнняў) */
+/* Гэтыя стылі перавызначаюць стандартныя стылі iziToast для адпаведнасці дызайну */
 .iziToast-capsule {
   background: rgba(239, 64, 64, 1) !important;
+  /* Чырвоны фон для папярэджанняў/памылак */
 }
 
 .iziToast {
@@ -160,7 +209,9 @@ body {
 
 .iziToast-wrapper {
   top: 36px !important;
+  /* Пазіцыя зверху */
   right: 36px !important;
+  /* Пазіцыя справа */
   width: 432px !important;
   height: 88px !important;
   border-radius: 4px;
@@ -173,13 +224,16 @@ body {
 
 .iziToast>.iziToast-body .iziToast-title {
   display: none !important;
+  /* Хаваем загаловак iziToast */
 }
 
 .iziToast-text {
   color: white !important;
+  /* Белы колер тэксту паведамлення */
 }
 
 .iziToast>.iziToast-close {
+  /* Карыстальніцкая іконка закрыцця (SVG у base64) */
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z'/%3E%3C/svg%3E") no-repeat 50% 50% !important;
   background-size: 20px !important;
   opacity: 1 !important;
@@ -197,37 +251,74 @@ body {
 }
 
 .iziToast>.iziToast-body .iziToast-icon.ico-info {
+  /* Карыстальніцкая іконка інфармацыі (SVG у base64) */
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z'/%3E%3C/svg%3E") no-repeat 50% 50% !important;
   background-size: 20px !important;
   color: transparent !important;
 }
 
-.loader-container {
-  position: fixed;
-  top: 180px;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: none;
-  z-index: 1001;
-  background-color: transparent;
-  padding: 0;
+/* Стылі для кнопкі "Загрузіць больш" */
+.load-more-button {
+  display: block;
+  /* Робім блочным, каб можна было цэнтраваць з margin: auto */
+  margin: 36px auto;
+  /* Адступ зверху/знізу і цэнтраванне па гарызанталі */
+  width: 140px;
+  /* Фіксаваная шырыня */
+  height: 40px;
+  background-color: rgba(78, 117, 255, 1);
+  /* Сіні фон */
+  color: white;
+  border: none;
   border-radius: 8px;
-  align-items: center;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: Montserrat;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: 0.04em;
+  transition: background-color 0.3s ease;
+  /* Плыўны пераход колеру */
+}
+
+.load-more-button:hover {
+  background-color: rgba(108, 140, 255, 1);
+  /* Змена колеру пры навядзенні */
+}
+
+/* Клас для хавання элементаў */
+.is-hidden {
+  display: none;
+  /* Хавае элемент цалкам */
+}
+
+/* Стылі для лоадера (спінера) */
+.loader-container {
+  display: none;
+  /* ЗМЕНА ТУТ: Хаваем па змаўчанні */
   justify-content: center;
-  text-align: center;
+  align-items: center;
+  margin-top: 20px;
+  /* Адступ зверху */
 }
 
 .loader-container.is-loading {
   display: flex;
+  /* Паказваем, калі актыўны (клас дадаецца/прыбіраецца JavaScript'ам) */
 }
 
 .loader {
   border: 8px solid #f3f3f3;
+  /* Светлая рамка */
   border-top: 8px solid rgba(78, 117, 255, 1);
+  /* Сіняя верхняя частка рамкі */
   border-radius: 50%;
+  /* Робіць круглым */
   width: 60px;
   height: 60px;
   animation: spin 2s linear infinite;
+  /* Анімацыя кручэння */
 }
 
 @keyframes spin {
