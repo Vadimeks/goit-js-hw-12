@@ -1,12 +1,241 @@
 /**
-  |============================
-  | include css partials with
-  | default @import url()
-  |============================
-*/
+ * |============================
+ * | include css partials with
+ * | default @import url()
+ * |============================
+ */
 /* Common styles */
 @import url('./reset.css');
 @import url('./base.css');
 
 
-/* Sections style */
+/* styles of pages */
+
+body {
+  font-family: sans-serif;
+  background-color: rgba(255, 255, 255, 1);
+  color: white;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 36px 156px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-form {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 36px;
+  width: 371px;
+  height: 40px;
+}
+
+.search-form label {
+  flex-grow: 1;
+}
+
+.search-form input[type="text"] {
+  width: 272px;
+  height: 40px;
+  border: 1px solid rgba(128, 128, 128, 1);
+  border-radius: 4px;
+  font-size: 16px;
+  color: #333;
+}
+
+.search-form input[type="text"]:hover {
+  border: 1px solid rgba(0, 0, 0, 1);
+}
+
+.search-form input[type="text"]:focus {
+  border: 1px solid rgba(78, 117, 255, 1);
+  outline: none;
+}
+
+.search-form button[type="submit"] {
+  width: 91px;
+  height: 40px;
+  background-color: rgba(78, 117, 255, 1);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: Montserrat;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: 0.04em;
+}
+
+.search-form button[type="submit"]:hover {
+  background-color: rgba(108, 140, 255, 1);
+}
+
+.gallery {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 24px;
+  max-width: 1128px;
+  border: none;
+}
+
+.gallery-item {
+  width: 360px;
+  height: 200px;
+  border-width: 1px;
+  border: 1px solid rgba(128, 128, 128, 1);
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.gallery-image {
+  display: block;
+  width: 100%;
+  height: calc(200px - 48px);
+  object-fit: cover;
+  transition: transform 0.3s ease-in-out;
+}
+
+.gallery-image:hover {
+  transform: scale(1.05);
+}
+
+.gallery-item a {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  height: 100%;
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 20px;
+  background-color: white;
+  color: rgba(46, 47, 66, 1);
+  height: 48px;
+}
+
+.info-item {
+  margin: 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 2;
+}
+
+.info-item b {
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 1.5;
+  color: rgba(46, 47, 66, 1);
+}
+
+.info-item span {
+  font-weight: 400;
+  line-height: 2;
+}
+
+.iziToast-capsule {
+  background: rgba(239, 64, 64, 1) !important;
+}
+
+.iziToast {
+  background: rgba(239, 64, 64, 1) !important;
+  border-color: rgba(238, 238, 238, 0.9);
+}
+
+.iziToast-wrapper {
+  top: 36px !important;
+  right: 36px !important;
+  width: 432px !important;
+  height: 88px !important;
+  border-radius: 4px;
+  padding: 0 !important;
+  color: white;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.iziToast>.iziToast-body .iziToast-title {
+  display: none !important;
+}
+
+.iziToast-text {
+  color: white !important;
+}
+
+.iziToast>.iziToast-close {
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z'/%3E%3C/svg%3E") no-repeat 50% 50% !important;
+  background-size: 20px !important;
+  opacity: 1 !important;
+}
+
+.iziToast>.iziToast-body .iziToast-message {
+  background: rgba(239, 64, 64, 1);
+  color: white !important;
+  font-family: Montserrat !important;
+  font-weight: 400 !important;
+  font-size: 16px !important;
+  line-height: 24px !important;
+  letter-spacing: 0.03em !important;
+  margin: 0;
+}
+
+.iziToast>.iziToast-body .iziToast-icon.ico-info {
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z'/%3E%3C/svg%3E") no-repeat 50% 50% !important;
+  background-size: 20px !important;
+  color: transparent !important;
+}
+
+.loader-container {
+  position: fixed;
+  top: 180px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+  z-index: 1001;
+  background-color: transparent;
+  padding: 0;
+  border-radius: 8px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.loader-container.is-loading {
+  display: flex;
+}
+
+.loader {
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid rgba(78, 117, 255, 1);
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
